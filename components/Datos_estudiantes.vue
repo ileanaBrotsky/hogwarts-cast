@@ -1,6 +1,6 @@
 <template>
     <v-flex class="text-center ">
-        <v-btn elevation="6"  class="boton_magico rounded-lg pa-3" @click="escribirTextoApi()">
+      <v-btn elevation="6"  class="boton_magico rounded-lg pa-3" @click="escribirTextoApi()">
             <v-icon dark> mdi-auto-fix </v-icon>
             ACCIO
         </v-btn>
@@ -15,6 +15,14 @@
           </v-sheet>
       </v-col>
     </v-row>
+    <v-row class="text-center" v-if="estudiantesDosGrupos.length !=0"> 
+      <v-col class="text-center">
+    <v-pagination 
+      v-model="page"
+      :length="6"
+    ></v-pagination>
+    </v-col>
+ </v-row>
    </v-container> 
    </v-flex>
 </template>
@@ -29,9 +37,9 @@ export default {
   }),
   methods: {
     escribirTextoApi: function(){
+      if(!this.estudiantesDosGrupos.length){
       this.$axios.get('http://hp-api.herokuapp.com/api/characters')
       .then(response=>{
-        console.log(response.data)
           let i=0;
           let estudiantes=[];
           for (i=0; i<response.data.length; i++){
@@ -49,12 +57,14 @@ export default {
               }
             });
           }
-           
-           this.cantidadEstudiantes= estudiantesDosGrupos.length;
+            this.cantidadEstudiantes=0;
+           this.cantidadEstudiantes= this.estudiantesDosGrupos.length;
+           console.log(this.cantidadEstudiantes);
       }).catch(err=>console.log(err));
       }).catch(err=>console.log(err));
    }
   }
+}
 }
 </script>
 <style scoped>
