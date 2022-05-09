@@ -64,10 +64,9 @@
     </v-main>
    
     <v-footer
-      :absolute="!fixed"
-      app
+      
     >
-    <v-row justify="space-between pa-2">
+    <v-row class="justify-space-between pt-3 px-2">
       <span>&copy; {{ new Date().getFullYear() }}</span>
       <p>Hecho con entusiasmo por ileana, para Norberto <span> <v-icon>mdi-emoticon-happy</v-icon></span></p>
       </v-row>
