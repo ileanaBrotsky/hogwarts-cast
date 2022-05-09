@@ -73,7 +73,9 @@ export default {
  color:white;
 }
 .boton_magico:hover{
- background: linear-gradient(to right, #5b0562,#171d25);
+color: aqua;
+background:none;
+box-shadow: none;
  width: 150px;
  height: 50px; 
  font-size: 23px;
