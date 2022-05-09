@@ -32,20 +32,18 @@ export default {
       this.$axios.get('http://hp-api.herokuapp.com/api/characters')
       .then(response=>{
         console.log(response.data)
-          let largo= response.data.length;
           let i=0;
           let estudiantes=[];
-          for (i=0; i<largo; i++){
+          for (i=0; i<response.data.length; i++){
            if(response.data[i].hogwartsStudent===true){
               estudiantes.push(response.data[i]) 
             }
           }
        this.$axios.get('http://hp-api.herokuapp.com/api/characters/students')
         .then(response=>{
-          let largo= response.data.length;
+        
           let i=0;
-      
-          for (i=0; i<largo; i++){
+          for (i=0; i<response.data.length; i++){
             estudiantes.forEach((estudiante)=>{
               if(response.data[i].name===estudiante.name){
               this.estudiantesDosGrupos.push(response.data[i]);
