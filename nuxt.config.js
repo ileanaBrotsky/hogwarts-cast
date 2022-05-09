@@ -3,8 +3,8 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - howarts-cast',
-    title: 'howarts-cast',
+    titleTemplate: '%s - hogwarts-cast',
+    title: 'hogwarts-cast',
     htmlAttrs: {
       lang: 'en'
     },

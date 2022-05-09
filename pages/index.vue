@@ -1,8 +1,10 @@
 <template>
-<v-container>
+<v-container fluid>
     <v-layout justify-center wrap>
-      <v-flex class="text-center ma-3" xs12>
+      <v-flex xs12>
+        <v-col>
         <Musica_harry/>
+        </v-col>
         <Datos_estudiantes/>
       </v-flex>
     </v-layout>
