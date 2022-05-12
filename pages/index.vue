@@ -3,27 +3,27 @@
     <v-layout justify-center wrap>
       <v-flex xs12>
         <v-col>
-        <Musica_harry/>
+        <MusicaHarry/>
         </v-col>
-        <Datos_estudiantes/>
+        <DatosEstudiantes/>
       </v-flex>
     </v-layout>
-     <Fondo_movil/>
+     <FondoMovil/>
 </v-container>
 </template>
 
 <script>
-import Fondo_movil from '../components/Fondo_movil';
-import Musica_harry from '../components/Musica_harry';
-import Datos_estudiantes from '../components/Datos_estudiantes';
+import FondoMovil from '../components/FondoMovil';
+import MusicaHarry from '../components/MusicaHarry';
+import DatosEstudiantes from '../components/DatosEstudiantes';
 export default {
   data: () => ({
   
   }),
   components: {
-    Fondo_movil,
-    Musica_harry,
-    Datos_estudiantes,
+    FondoMovil,
+    MusicaHarry,
+    DatosEstudiantes,
   },
 }
 </script>

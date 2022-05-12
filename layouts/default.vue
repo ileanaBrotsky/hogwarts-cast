@@ -2,7 +2,6 @@
   <v-app >
     <v-main>
       <v-container fluid>
-         <MenuNavegacion />
         <Nuxt />
       </v-container>
     </v-main>
