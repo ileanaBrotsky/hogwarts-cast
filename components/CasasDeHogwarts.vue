@@ -2,44 +2,44 @@
     <v-flex class="text-center ">
      <v-container >
        <v-row>
-        <v-col xs4 md-6 xs-12>
+        <v-col  lg="3" md="6" xs="12">
           <v-sheet class=" text-center fondo_casa Gryffindor"  elevation="18"  outlined rounded shaped >
             <v-virtual-scroll  class="scroll_nombres" :items="Gryffindor" height="350" item-height="40">
                 <template v-slot:default="{ item }">
-                    <v-list-item class="lista_nombres_casa" :key="item">
+                    <v-list-item class="lista_nombres_casa" :key="item.name">
                         {{ item.name}}
                     </v-list-item>
                 </template>
             </v-virtual-scroll>
           </v-sheet>
         </v-col>
-      <v-col xs4 md-6 xs-12>
+      <v-col lg="3" md="6" xs="12">
         <v-sheet class="text-center fondo_casa Slytherin"  elevation="18"  outlined rounded shaped >
            <v-virtual-scroll  class="scroll_nombres" :items="Slytherin" height="350" item-height="40">
               <template v-slot:default="{ item }">
-                  <v-list-item class="lista_nombres_casa" :key="item">
+                  <v-list-item class="lista_nombres_casa" :key="item.name">
                       {{ item.name}}
                   </v-list-item>
              </template>
            </v-virtual-scroll>
         </v-sheet>
       </v-col>
-      <v-col xs4 md-6 xs-12>
+      <v-col  lg="3" md="6" xs="12">
         <v-sheet class="text-center fondo_casa Ravenclaw"  elevation="18"  outlined rounded shaped  >
           <v-virtual-scroll class="scroll_nombres" :items="Ravenclaw" height="350" item-height="40">
             <template v-slot:default="{ item }">
-              <v-list-item class="lista_nombres_casa" :key="item">
+              <v-list-item class="lista_nombres_casa" :key="item.name">
                   {{ item.name}}
               </v-list-item>
             </template>
           </v-virtual-scroll>
         </v-sheet>
       </v-col>
-      <v-col xs4 md-6 xs-12>
+      <v-col  lg="3" md="6" xs="12">
         <v-sheet class=" text-center fondo_casa Hufflepuff"  elevation="18"  outlined rounded shaped  >
           <v-virtual-scroll  class="scroll_nombres " :items="Hufflepuff" height="350" item-height="40">
               <template v-slot:default="{ item }">
-                <v-list-item class="lista_nombres_casa" :key="item">
+                <v-list-item class="lista_nombres_casa" :key="item.name">
                       {{ item.name}}
                 </v-list-item>
              </template>
@@ -88,10 +88,10 @@ export default {
          }
   },
   mounted(){
-      console.log(this.Slytherin);
-      console.log(this.Gryffindor);
-      console.log(this.Hufflepuff);
-      console.log(this.Ravenclaw)
+      // console.log(this.Slytherin);
+      // console.log(this.Gryffindor);
+      // console.log(this.Hufflepuff);
+      // console.log(this.Ravenclaw)
   },
   methods:{
    
@@ -104,6 +104,8 @@ export default {
 .fondo_casa{
   background: transparent !important;
   height: 80vh;
+  width: 280px;
+  margin: auto;
  
 }
 .Hufflepuff{
