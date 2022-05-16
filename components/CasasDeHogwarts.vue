@@ -87,16 +87,6 @@ export default {
             }  
          }
   },
-  mounted(){
-      // console.log(this.Slytherin);
-      // console.log(this.Gryffindor);
-      // console.log(this.Hufflepuff);
-      // console.log(this.Ravenclaw)
-  },
-  methods:{
-   
-
-  }
 }
 </script>
 
@@ -106,42 +96,38 @@ export default {
   height: 80vh;
   width: 280px;
   margin: auto;
- 
 }
 .Hufflepuff{
-background-image: url("../assets/img/fondoHuf.jpg")!important;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center center;
-   
+  background-image: url("../assets/img/fondoHuf.jpg")!important;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
 }
 .Gryffindor{
-background-image: url("../assets/img/fondoGryf.jpg")!important;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center center;
-     background-repeat: no-repeat;
+  background-image: url("../assets/img/fondoGryf.jpg")!important;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 .Slytherin{
-background-image: url("../assets/img/fondoSlyt.jpg")!important;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center center;
-     background-repeat: no-repeat;
+  background-image: url("../assets/img/fondoSlyt.jpg")!important;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 .Ravenclaw{
-background-image: url("../assets/img/fondoRav.jpg")!important;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center center;
-     background-repeat: no-repeat;
+  background-image: url("../assets/img/fondoRav.jpg")!important;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 .scroll_nombres{
   margin-top:180px;
- 
 }
 .lista_nombres_casa{
   color:white !important;
- 
 }
 </style>
