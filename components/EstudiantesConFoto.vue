@@ -4,26 +4,26 @@
        <input type="text" class="input_search pa-3 ma-2" v-model="search" placeholder="Buscar estudiante por nombre">
        </v-row>
        <v-row justify="center">
-        <template  v-for= "(estudiante, index) in filteredEstudents" >
-                <v-card v-if= "estudiante.image != ''"  class=" tarjeta pa-3 ma-2 text-center" elevation="18" width="350px" heigth="90px"  rounded shaped  :key="index">
+        <template  v-for= "(estudiante) in filteredEstudents" >
+                <v-card v-if= "estudiante.image != ''"  class=" tarjeta pa-3 ma-2 text-center" elevation="18" width="350px" heigth="90px"  rounded shaped  :key="estudiante.name">
                     <v-row>
                         <v-col class="foto ">
                            <img :src= "(estudiante.image )"   alt= "">  
                          </v-col>
                         <v-col>
                            <h3> {{estudiante.name}} </h3> 
-                            <button class="mt-1 btn-verMas" @click="abrirModal(index)"> <v-icon class="mr-1 ojo" >mdi-eye</v-icon>  Ver mas...</button>
+                            <button class="mt-1 btn-verMas" @click="abrirModal(estudiante.name)"> <v-icon class="mr-1 ojo" >mdi-eye</v-icon>  Ver mas...</button>
                         </v-col>       
                     </v-row>
                 </v-card>
-                   <v-card v-else  class=" tarjeta pa-3 ma-2 text-center" elevation="18" width="350px" heigth="90px"  rounded shaped  :key="index">
+                   <v-card v-else  class=" tarjeta pa-3 ma-2 text-center" elevation="18" width="350px" heigth="90px"  rounded shaped  :key="estudiante.name">
                     <v-row>
                         <v-col v-if= "estudiante.house!=''" class="foto ">
                            <img :src= "'/_nuxt/assets/img/'+(estudiante.house)+'.png'"   alt= "escudo casa"> 
                          </v-col> 
                         <v-col>
                            <h3> {{estudiante.name}} </h3> 
-                            <button class="mt-1 btn-verMas" @click="abrirModal(index)"> <v-icon class="mr-1 ojo" >mdi-eye</v-icon>  Ver mas...</button>
+                            <button class="mt-1 btn-verMas" @click="abrirModal(estudiante.name)"> <v-icon class="mr-1 ojo" >mdi-eye</v-icon>  Ver mas...</button>
                         </v-col>       
                     </v-row>
                 </v-card> 
@@ -42,13 +42,12 @@
                      <div v-if= "imagen !=''" class="foto_personaje" > 
                         <img :src="imagen" shaped rounded elevation="18" alt="foto personaje" />  
                      </div>
-                         <div v-else class="foto_personaje" > 
-                        <img v-if="casa==='Gryffindor'" src= "~/assets/img/Gryffindor.png" shaped rounded elevation="18" alt="escudo casa" />  
-                         <img v-else-if="casa==='Hufflepuff'" src= "~/assets/img/Hufflepuff.png" shaped rounded elevation="18" alt="escudo casa" />  
-                          <img v-else-if="casa==='Ravenclaw'" src= "~/assets/img/Ravenclaw.png" shaped rounded elevation="18" alt="escudo casa" />  
-                           <img v-else-if="casa==='Slytherin'" src= "~/assets/img/Slytherin.png" shaped rounded elevation="18" alt="escudo casa" />  
-                          
-                     </div>      
+                        <div v-else class="foto_personaje" > 
+                            <img v-if="casa==='Gryffindor'" src= "~/assets/img/Gryffindor.png" shaped rounded elevation="18" alt="escudo casa" />  
+                            <img v-else-if="casa==='Hufflepuff'" src= "~/assets/img/Hufflepuff.png" shaped rounded elevation="18" alt="escudo casa" />  
+                            <img v-else-if="casa==='Ravenclaw'" src= "~/assets/img/Ravenclaw.png" shaped rounded elevation="18" alt="escudo casa" />  
+                            <img v-else-if="casa==='Slytherin'" src= "~/assets/img/Slytherin.png" shaped rounded elevation="18" alt="escudo casa" />  
+                        </div>      
                     <div class="titulo-varita" >
                         <h6>Materiales de la varita</h6>
                     </div>
@@ -83,7 +82,11 @@ export default {
        return this.estudiantes.filter((estudiante)=>{
           let busqueda= this.search.toUpperCase()
           let est=estudiante.name.toUpperCase()
-            return est.match(busqueda);
+          if( est.match(busqueda)){
+            return estudiante;
+          }
+          
+          
     })
 
     }
@@ -107,12 +110,27 @@ export default {
       // console.log(this.estudiantes)
   },
   methods:{
-      abrirModal: function(key){
+      abrirModal: function(name){
         this.mostrarModal=true;
-        this.nombre=this.estudiantes[key].name;
-        this.varita= this.estudiantes[key].wand;
-         this.casa=this.estudiantes[key].house;
-        this.imagen= this.estudiantes[key].image;
+
+        this.nombre=name;
+        this.estudiantes.forEach((estudiante)=>{
+            if(estudiante.name===name){
+                this.varita= estudiante.wand;
+                this.casa=estudiante.house;
+                if(estudiante.image!=""){
+                    this.imagen= estudiante.image;
+                }
+                else{
+                    this.imagen= '';
+                }
+               
+
+            }
+        }
+            
+        )
+      
        // console.log(  this.varita= this.estudiantes[key].wand);
       },
        cerrarModal: function(){
