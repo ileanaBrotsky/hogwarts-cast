@@ -1,7 +1,10 @@
 <template>
     <v-container>
-      <v-row>
-        <template  v-for= "(estudiante, index) in estudiantes" >
+      <v-row justify="center">
+       <input type="text" class="input_search pa-3 ma-2" v-model="search" placeholder="Buscar estudiante por nombre">
+       </v-row>
+       <v-row justify="center">
+        <template  v-for= "(estudiante, index) in filteredEstudents" >
                 <v-card v-if= "estudiante.image != ''"  class=" tarjeta pa-3 ma-2 text-center" elevation="18" width="350px" heigth="90px"  rounded shaped  :key="index">
                     <v-row>
                         <v-col class="foto ">
@@ -13,6 +16,17 @@
                         </v-col>       
                     </v-row>
                 </v-card>
+                   <v-card v-else  class=" tarjeta pa-3 ma-2 text-center" elevation="18" width="350px" heigth="90px"  rounded shaped  :key="index">
+                    <v-row>
+                        <v-col v-if= "estudiante.house!=''" class="foto ">
+                           <img :src= "'/_nuxt/assets/img/'+(estudiante.house)+'.png'"   alt= "escudo casa"> 
+                         </v-col> 
+                        <v-col>
+                           <h3> {{estudiante.name}} </h3> 
+                            <button class="mt-1 btn-verMas" @click="abrirModal(index)"> <v-icon class="mr-1 ojo" >mdi-eye</v-icon>  Ver mas...</button>
+                        </v-col>       
+                    </v-row>
+                </v-card> 
         </template> 
        </v-row>
         <v-container fluid v-if="mostrarModal"  @click="cerrarModal" class="contenedor-modal">
@@ -25,10 +39,16 @@
                     <h1 class="mb-3">{{nombre}}</h1>
                     <p>Pertenece a la casa de  {{casa}}</p> 
                     </div>
-                     <div class="foto_personaje" > 
+                     <div v-if= "imagen !=''" class="foto_personaje" > 
                         <img :src="imagen" shaped rounded elevation="18" alt="foto personaje" />  
                      </div>
-                            
+                         <div v-else class="foto_personaje" > 
+                        <img v-if="casa==='Gryffindor'" src= "~/assets/img/Gryffindor.png" shaped rounded elevation="18" alt="escudo casa" />  
+                         <img v-else-if="casa==='Hufflepuff'" src= "~/assets/img/Hufflepuff.png" shaped rounded elevation="18" alt="escudo casa" />  
+                          <img v-else-if="casa==='Ravenclaw'" src= "~/assets/img/Ravenclaw.png" shaped rounded elevation="18" alt="escudo casa" />  
+                           <img v-else-if="casa==='Slytherin'" src= "~/assets/img/Slytherin.png" shaped rounded elevation="18" alt="escudo casa" />  
+                          
+                     </div>      
                     <div class="titulo-varita" >
                         <h6>Materiales de la varita</h6>
                     </div>
@@ -58,7 +78,15 @@ export default {
   computed:{
     estudiantes(){
       return this.$store.getters['getEstudiantes']
-    },    
+    },
+    filteredEstudents: function(){
+       return this.estudiantes.filter((estudiante)=>{
+          let busqueda= this.search.toUpperCase()
+          let est=estudiante.name.toUpperCase()
+            return est.match(busqueda);
+    })
+
+    }
   },
   data () {
       return {
@@ -67,7 +95,9 @@ export default {
           casa: 'pruebaCasa',
           varita: [],
           imagen: '',
-          nacimiento: 'date'
+          nacimiento: 'date',
+          search:'',
+          escudo: '',
     }
     },
   created(){
@@ -94,6 +124,13 @@ export default {
 </script>
 
 <style>
+.input_search{
+background: white;
+width: 90%;
+border-radius:5px;
+font-size: 12px;
+
+}
 .tarjeta {
   background-image: url("~assets/img/fondoCard2.jpg")!important; 
  background-position: cover; 
@@ -128,18 +165,18 @@ width: 90px;
     
     background: rgba(49, 48, 48, 0.6);
     height: 100vh;
-     position: fixed;
+    position: fixed;
     top: 50%;
     left:50%;
     transform:translate(-50%,-50%) ;
+  
+   
 }
 .modal-datos__completos{
     margin:0;
     padding: 10px;
-    min-width: 30%;
-    
-    height: 80vh;
-    background-color:transparent!important;
+  width: 640px;
+  height: 800px;    background-color:transparent!important;
     background-image: url("../assets/img/fondoModalCompleto.png")!important;
     background-size: cover;
     background-attachment: fixed;
@@ -148,16 +185,17 @@ width: 90px;
     top: 50%;
     left:50%;
     transform:translate(-50%,-50%) ;
+   
 }
 .layout_infoPersonaje{
-    width: 95%;
+   width: 95%;
     position: relative;
-    top: 10%;
+    top: 15%;
     margin:0 auto;
     display: grid;
     align-items: center;
     grid-template-columns: 50% 20% 1fr;
-    grid-template-rows: 22vh 3vh 1fr;
+    grid-template-rows: 60% 10% 1fr;
     grid-template-areas:
     "nombre_personaje nombre_personaje foto_personaje"
     "titulo-varita titulo-varita titulo-varita"
@@ -171,12 +209,15 @@ width: 90px;
       font-size: 0.7em;
 }
 .foto_personaje{
-    grid-area: foto_personaje;
+   grid-area: foto_personaje;
+   height: 100%;
+   max-height: 250px;
    padding: 5px;
+   overflow: hidden;
 }
 .foto_personaje img{
     border-radius: 5px;
-   width: 95px;
+   width: 100%;
    box-shadow: #382404 -3px 10px 8px 0;
 }
 .titulo-varita{
@@ -197,21 +238,13 @@ width: 90px;
     border-left: #382404 solid 3px;
     grid-area: info_varita;
 }
- @media screen and (max-width:900px){
+
+@media screen and (max-width:500px){
 .modal-datos__completos{
  top:50%;
  left:50%;
- width: 400px;
-}
-.layout_infoPersonaje{
-    width: 100%;
-}
-} 
-@media screen and (max-width:400px){
-.modal-datos__completos{
- top:50%;
- left:50%;
- width: 320px;
+ height: 600px;
+ width: 390px;
 }
 .layout_infoPersonaje{
     width: 100%;

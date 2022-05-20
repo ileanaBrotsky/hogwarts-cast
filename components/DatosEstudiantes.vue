@@ -27,11 +27,15 @@ export default {
    
   },
   data: () => ({
- 
+//  estudiantes_ordenados:this.estudiantes.sort()
+
   }),
   created(){
     this.$store.dispatch("recibirEstudiantes")
-
+ 
+  },
+  mounted(){
+    // console.log(this.estudiantes_ordenados)
   }
 
 }
