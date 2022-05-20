@@ -175,8 +175,9 @@ width: 90px;
 .modal-datos__completos{
     margin:0;
     padding: 10px;
-  width: 640px;
-  height: 800px;    background-color:transparent!important;
+    width: 500px;
+    height: 600px;    
+    background-color:transparent!important;
     background-image: url("../assets/img/fondoModalCompleto.png")!important;
     background-size: cover;
     background-attachment: fixed;
@@ -195,7 +196,7 @@ width: 90px;
     display: grid;
     align-items: center;
     grid-template-columns: 50% 20% 1fr;
-    grid-template-rows: 60% 10% 1fr;
+    grid-template-rows: 50% 2% 1fr;
     grid-template-areas:
     "nombre_personaje nombre_personaje foto_personaje"
     "titulo-varita titulo-varita titulo-varita"
